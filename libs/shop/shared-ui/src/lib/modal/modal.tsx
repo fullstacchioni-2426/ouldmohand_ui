@@ -33,13 +33,17 @@ export function Modal({
     };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'hidden';
+      if (typeof document !== 'undefined') {
+        document.addEventListener('keydown', handleEscape);
+        document.body.style.overflow = 'hidden';
+      }
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
+      if (typeof document !== 'undefined') {
+        document.removeEventListener('keydown', handleEscape);
+        document.body.style.overflow = 'unset';
+      }
     };
   }, [isOpen, closableOnEscape, onClose]);
 
